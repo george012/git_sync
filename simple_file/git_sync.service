@@ -1,0 +1,17 @@
+[Unit]
+Description=git sync service
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Restart=on-failure
+RestartSec=5s
+ExecStart=/git_sync/git_sync
+ExecStop=/bin/kill -TERM $MAINPID
+WorkingDirectory=/git_sync
+LimitNOFILE=102400
+
+[Install]
+WantedBy=multi-user.target

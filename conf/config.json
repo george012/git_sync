@@ -1,0 +1,13 @@
+{
+  "api": {
+    "enabled": true,
+    "port": 6789,
+    "user_agent_allowed": null,
+    "api_methods_allowed": null
+  },
+  "auth": {
+    "username": "hvtOISWYFGQ=",
+    "password": "v4z+CPcEmRI="
+  },
+  "language": ""
+}
