@@ -15,7 +15,7 @@ import (
 
 const (
 	ProjectName        = "git_sync"
-	ProjectVersion     = "v0.0.2"
+	ProjectVersion     = "v0.0.3"
 	ProjectDescription = "git_sync service"
 	ProjectBundleID    = "com.git_sync.git_sync"
 	APIPortDefault     = 6789
