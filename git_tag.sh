@@ -114,7 +114,7 @@ function git_handle_push() {
     echo "Pre Del Version With v"${pre_del_version_no}
 
     git add . \
-    && git commit -m "Update v${next_version_no}" \
+    && git commit -m "Release v${next_version_no}_$(date -u +"%Y-%m-%d_%H:%M:%S")"_"UTC" \
     && git tag v${next_version_no} \
     && git tag -f latest v${next_version_no}
 

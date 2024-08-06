@@ -31,10 +31,6 @@ GetOSType(){
 GetOSType
 
 function toBuild() {
-    if [[ "$OS_TYPE" != "Linux" && "${RUN_MODE}" == "release" ]]; then
-        echo "release build must to linux OS"
-        exit 0
-    fi
 
     rm -rf ${build_path}/${RUN_MODE}
     mkdir -p ${build_path}/${RUN_MODE}
@@ -69,9 +65,9 @@ function toBuild() {
 function package_files(){
     cd ${build_path}/${RUN_MODE} \
     && if [[ "$OS_TYPE" == "Windows" ]]; then
-            7z a ./${product_name}_${RUN_MODE}_${CURRENT_VERSION}.zip ./${product_name} >/dev/null 2>&1
+            7z a ./${product_name}_${OS_TYPE}_${RUN_MODE}_${CURRENT_VERSION}.zip ./${product_name} >/dev/null 2>&1
         else
-            zip -r ./${product_name}_${RUN_MODE}_${CURRENT_VERSION}.zip ./${product_name}
+            zip -r ./${product_name}_${OS_TYPE}_${RUN_MODE}_${CURRENT_VERSION}.zip ./${product_name}
         fi \
     && mkdir -p ../${UPLOAD_TMP_DIR} \
     && mv *.zip ../${UPLOAD_TMP_DIR} \
