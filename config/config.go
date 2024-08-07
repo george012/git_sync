@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"github.com/george012/git_sync/api/api_config"
+	"github.com/george012/git_sync/repo_mg/repo_mg_cfg"
 	"github.com/george012/gtbox/gtbox_encryption"
 	"github.com/george012/gtbox/gtbox_log"
 	"io/fs"
@@ -32,9 +33,9 @@ type Auth struct {
 }
 
 type FileConfig struct {
-	Api      api_config.ApiConfig `yaml:"api" json:"api"`
-	Auth     Auth                 `yaml:"auth" json:"auth"`
-	Language string               `yaml:"language" json:"language"`
+	Api               api_config.ApiConfig          `yaml:"api" json:"api"`
+	Auth              Auth                          `yaml:"auth" json:"auth"`
+	RepoManagerConfig repo_mg_cfg.RepoManagerConfig `yaml:"repo_mg_config" json:"repo_mg_config"`
 }
 
 func LoadConfig(file string) error {
@@ -90,6 +91,18 @@ func generateDefaultConfigWithJsonContent() []byte {
 		Auth: Auth{
 			Username: gtbox_encryption.GTEnc("root", "username"),
 			Password: gtbox_encryption.GTEnc("root", "password"),
+		},
+		RepoManagerConfig: repo_mg_cfg.RepoManagerConfig{
+			SourceRepo: repo_mg_cfg.RepoInfo{
+				SSHKeyPath: "${HOME}/.ssh/id_rsa",
+				Address:    "git@example-git-repo.com:repo-group/repo-name.git",
+			},
+			TargetRepos: []repo_mg_cfg.RepoInfo{
+				repo_mg_cfg.RepoInfo{
+					SSHKeyPath: "${HOME}/.ssh/id_rsa",
+					Address:    "git@example-git-repo.com:repo-group/repo-name.git",
+				},
+			},
 		},
 	}
 

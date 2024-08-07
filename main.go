@@ -6,6 +6,7 @@ import (
 	"github.com/george012/git_sync/common"
 	"github.com/george012/git_sync/config"
 	"github.com/george012/git_sync/custom_cmd"
+	"github.com/george012/git_sync/repo_mg"
 	"github.com/george012/gtbox"
 	"github.com/george012/gtbox/gtbox_cmd"
 	"github.com/george012/gtbox/gtbox_encryption"
@@ -100,6 +101,8 @@ func main() {
 	config.SyncConfigFile(config.CurrentApp.AppConfigFilePath, nil)
 
 	api.StartAPIService(&config.GlobalConfig.Api)
+
+	repo_mg.StartAutoRepoSyncService(&config.GlobalConfig.RepoManagerConfig)
 
 	common.LoadSigHandle(nil, nil)
 }

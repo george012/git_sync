@@ -9,5 +9,16 @@
     "username": "hvtOISWYFGQ=",
     "password": "v4z+CPcEmRI="
   },
-  "language": ""
+  "repo_mg_config": {
+    "source_repo": {
+      "ssh_key_path": "${HOME}/.ssh/id_rsa",
+      "address": "git@example-git-repo.com:repo-group/repo-name.git"
+    },
+    "target_repos": [
+      {
+        "ssh_key_path": "${HOME}/.ssh/id_rsa",
+        "address": "git@example-git-repo.com:repo-group/repo-name.git"
+      }
+    ]
+  }
 }
