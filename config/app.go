@@ -1,6 +1,7 @@
 package config
 
 import (
+	"fmt"
 	"github.com/george012/gtbox"
 	"github.com/george012/gtbox/gtbox_app"
 )
@@ -11,17 +12,16 @@ var (
 
 type ExtendApp struct {
 	*gtbox_app.App
-	NetListenPortStratumDefault int
-	NetListenAPIPortDefault     int
-	DualPoolEtcHashInsideUrl    string
+	APIListenPort int
+	ReposDir      string
 }
 
 func NewApp(appName, bundleID, description string, runMode gtbox.RunMode, apiPortDefault int) *ExtendApp {
 	app := &ExtendApp{
-		App:                         gtbox_app.NewApp(appName, ProjectVersion, bundleID, description, runMode),
-		NetListenPortStratumDefault: 0,
-		NetListenAPIPortDefault:     apiPortDefault,
+		App:           gtbox_app.NewApp(appName, ProjectVersion, bundleID, description, runMode),
+		APIListenPort: apiPortDefault,
 	}
 
+	app.ReposDir = fmt.Sprintf("%s/repos_handler", app.AppRunAsDir)
 	return app
 }

@@ -1,10 +1,15 @@
 package repo_mg_cfg
 
-type RepoInfo struct {
+type RepoInfoBase struct {
 	SSHKeyPath string `json:"ssh_key_path"`
 	Address    string `json:"address"`
 }
+
+type RepoInfo struct {
+	SourceRepo  RepoInfoBase   `json:"source_repo"`
+	TargetRepos []RepoInfoBase `json:"target_repos"`
+}
+
 type RepoManagerConfig struct {
-	SourceRepo  RepoInfo   `json:"source_repo"`
-	TargetRepos []RepoInfo `json:"target_repos"`
+	Repos []RepoInfo `json:"repos"`
 }

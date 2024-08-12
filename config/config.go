@@ -86,26 +86,33 @@ func generateDefaultConfigWithJsonContent() []byte {
 	fCfg := &FileConfig{
 		Api: api_config.ApiConfig{
 			Enabled: true,
-			Port:    CurrentApp.NetListenAPIPortDefault,
+			Port:    CurrentApp.APIListenPort,
 		},
 		Auth: Auth{
 			Username: gtbox_encryption.GTEnc("root", "username"),
 			Password: gtbox_encryption.GTEnc("root", "password"),
 		},
 		RepoManagerConfig: repo_mg_cfg.RepoManagerConfig{
-			SourceRepo: repo_mg_cfg.RepoInfo{
-				SSHKeyPath: "${HOME}/.ssh/id_rsa",
-				Address:    "git@example-git-repo.com:repo-group/repo-name.git",
-			},
-			TargetRepos: []repo_mg_cfg.RepoInfo{
+			Repos: []repo_mg_cfg.RepoInfo{
 				repo_mg_cfg.RepoInfo{
-					SSHKeyPath: "${HOME}/.ssh/id_rsa",
-					Address:    "git@example-git-repo.com:repo-group/repo-name.git",
+					SourceRepo: repo_mg_cfg.RepoInfoBase{
+						SSHKeyPath: "$HOME/.ssh/id_rsa",
+						Address:    "git@src-repo.com:repo-group/repo-name.git",
+					},
+					TargetRepos: []repo_mg_cfg.RepoInfoBase{
+						repo_mg_cfg.RepoInfoBase{
+							SSHKeyPath: "$HOME/.ssh/id_rsa",
+							Address:    "git@target-repo-1.com:repo-group/repo-name.git",
+						},
+						repo_mg_cfg.RepoInfoBase{
+							SSHKeyPath: "$HOME/.ssh/id_rsa",
+							Address:    "git@target-repo-2.com:repo-group/repo-name.git",
+						},
+					},
 				},
 			},
 		},
 	}
-
 	jd, _ := json.MarshalIndent(fCfg, "", "  ")
 	return jd
 }

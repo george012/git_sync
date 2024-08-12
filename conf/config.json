@@ -10,14 +10,22 @@
     "password": "v4z+CPcEmRI="
   },
   "repo_mg_config": {
-    "source_repo": {
-      "ssh_key_path": "${HOME}/.ssh/id_rsa",
-      "address": "git@example-git-repo.com:repo-group/repo-name.git"
-    },
-    "target_repos": [
+    "repos": [
       {
-        "ssh_key_path": "${HOME}/.ssh/id_rsa",
-        "address": "git@example-git-repo.com:repo-group/repo-name.git"
+        "source_repo": {
+          "ssh_key_path": "$HOME/.ssh/id_rsa",
+          "address": "ssh://git@192.168.99.7:20866/crazy/dual-pool.git"
+        },
+        "target_repos": [
+          {
+            "ssh_key_path": "$HOME/.ssh/id_ed25519",
+            "address": "git@github.com:george012/dual_pool.git"
+          },
+          {
+            "ssh_key_path": "$HOME/.ssh/id_rsa",
+            "address": "git@target-repo-2.com:repo-group/repo-name.git"
+          }
+        ]
       }
     ]
   }
